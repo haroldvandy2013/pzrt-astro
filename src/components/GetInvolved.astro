@@ -1,0 +1,13 @@
+---
+import MediaImage from './MediaImage.astro';
+import { site, contactHref } from '../lib/site';
+---
+<div class="get-involved">
+  <div class="contact-copy">
+    <h2>Get Involved</h2>
+    <p class="contact-address">{site.contactName}: <a href={contactHref}>{site.contactEmail}</a></p>
+    <p class="contact-invitation">{site.contactText}</p>
+    <a class="button contact-button" href={contactHref}>Contact Us</a>
+  </div>
+  <MediaImage class="contact-illustration" src={site.contactImage} alt={site.contactAlt} width={1000} sizes="(min-width: 900px) 45vw, 100vw" />
+</div>

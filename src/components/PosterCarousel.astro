@@ -1,0 +1,61 @@
+---
+import MediaImage from './MediaImage.astro';
+import { site, href } from '../lib/site';
+---
+<div class="poster-carousel" role="region" aria-roledescription="carousel" aria-label="Performance posters">
+  <div class="poster-stage">
+    {site.gallery.map((item, index) => (
+      <figure class="poster-slide" hidden={index !== 0} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${site.gallery.length}`}>
+        <MediaImage src={item.image} alt={item.alt} width={1200} eager={index === 0} sizes="(min-width: 700px) 644px, 90vw" />
+        <figcaption class="sr-only">{item.caption}</figcaption>
+      </figure>
+    ))}
+    <button hidden class="poster-previous" aria-label="Previous poster"><span aria-hidden="true">‹</span></button>
+    <button hidden class="poster-next" aria-label="Next poster"><span aria-hidden="true">›</span></button>
+  </div>
+  <div class="poster-thumbnails">
+    {site.gallery.map((item, index) => (
+      <a href={href(item.image)} class="poster-thumbnail" data-slide-index={index} aria-label={`Show poster: ${item.caption}`} aria-current={index === 0 ? 'true' : undefined}>
+        <MediaImage src={item.image} alt="" width={320} sizes="120px" />
+      </a>
+    ))}
+  </div>
+  <p class="sr-only poster-status" aria-live="polite"></p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.poster-carousel').forEach((carousel) => {
+    const slides = [...carousel.querySelectorAll<HTMLElement>('.poster-slide')];
+    const thumbnails = [...carousel.querySelectorAll<HTMLAnchorElement>('.poster-thumbnail')];
+    const previous = carousel.querySelector<HTMLButtonElement>('.poster-previous');
+    const next = carousel.querySelector<HTMLButtonElement>('.poster-next');
+    const status = carousel.querySelector<HTMLElement>('.poster-status');
+    let selected = 0;
+    function show(index: number) {
+      selected = (index + slides.length) % slides.length;
+      slides.forEach((slide, position) => { slide.hidden = position !== selected; });
+      thumbnails.forEach((thumbnail, position) => {
+        if (position === selected) thumbnail.setAttribute('aria-current', 'true');
+        else thumbnail.removeAttribute('aria-current');
+      });
+      if (status) status.textContent = thumbnails[selected]?.getAttribute('aria-label') || '';
+    }
+    if (slides.length > 1) {
+      if (previous) previous.hidden = false;
+      if (next) next.hidden = false;
+    }
+    previous?.addEventListener('click', () => show(selected - 1));
+    next?.addEventListener('click', () => show(selected + 1));
+    thumbnails.forEach((thumbnail, index) => thumbnail.addEventListener('click', (event) => {
+      event.preventDefault();
+      show(index);
+    }));
+    carousel.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+        event.preventDefault();
+        show(selected + (event.key === 'ArrowRight' ? 1 : -1));
+        thumbnails[selected]?.focus();
+      }
+    });
+  });
+</script>

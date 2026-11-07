@@ -15,9 +15,22 @@ try {
     const response = await page.goto(url, { waitUntil: 'networkidle' });
     expect(response?.status()).toBe(200);
     await page.evaluate(() => document.fonts.ready);
-    await expect(page.locator('h1')).toContainText('Many voices.');
+    await expect(page.locator('h1')).toContainText('Who We Are');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-    await expect(page.locator('.hero-visual img')).toBeVisible();
+    await expect(page.locator('.poster-slide:not([hidden]) img')).toBeVisible();
+    await expect(page.locator('.poster-slide:not([hidden])')).toHaveCount(1);
+    await page.getByRole('button', { name: 'Next poster' }).click();
+    await expect(page.locator('.poster-thumbnail[aria-current=true]')).toHaveAttribute('data-slide-index', '1');
+    await page.getByRole('button', { name: 'Previous poster' }).click();
+    await expect(page.locator('.poster-thumbnail[aria-current=true]')).toHaveAttribute('data-slide-index', '0');
+    const header = await page.locator('.site-header').boundingBox();
+    if (name === 'desktop') {
+      expect(Math.abs(header.height - 291)).toBeLessThan(15);
+      const intro = await page.locator('.intro-content').boundingBox();
+      expect(intro.width).toBe(780);
+      expect(await page.locator('.brand-name').evaluate((element) => getComputedStyle(element).fontFamily)).toContain('Dancing Script');
+    }
+    await page.evaluate(() => window.scrollTo(0, 0));
     await page.screenshot({ path: join(output, `pzrt-${name}.png`), fullPage: true });
     if (name === 'mobile') {
       await expect(page.locator('#site-navigation')).toBeHidden();
@@ -40,6 +53,11 @@ try {
         await page.locator('.video-load').first().click();
         await expect(page.locator('iframe')).toHaveAttribute('src', /youtube-nocookie\.com\/embed\/jwXFh2uTBIM/);
         await expect(page.locator('.video-frame').first().getByRole('button')).toHaveCount(0);
+      }
+      if (path === 'blog/') {
+        await page.getByRole('searchbox', { name: 'Search articles' }).fill('no shame');
+        await expect(page.locator('.article-search-item:not([hidden])')).toHaveCount(1);
+        await page.getByRole('searchbox', { name: 'Search articles' }).fill('');
       }
       if (path === 'bulletin-wall-2021/') {
         await expect(page.getByText('Not connected yet')).toBeVisible();

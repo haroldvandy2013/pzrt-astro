@@ -73,12 +73,17 @@ test('CMS exposes maintainable files, article bodies and validated video fields'
   const articles = cms.content.find((entry) => entry.name === 'articles');
   assert.equal(articles.fields.find((field) => field.name === 'body').type, 'rich-text');
   const video = cms.content.find((entry) => entry.name === 'videos');
+  assert.ok(video.fields.some((field) => field.name === 'duration'));
+  assert.ok(video.fields.some((field) => field.name === 'description'));
+  assert.ok(!articles.fields.some((field) => field.name === 'duration'));
   const regex = new RegExp(video.fields.find((field) => field.name === 'youtube').pattern.regex);
   assert.ok(regex.test('https://www.youtube.com/watch?v=jwXFh2uTBIM'));
   assert.ok(!regex.test('https://evil.test/watch?v=jwXFh2uTBIM'));
   const site = JSON.parse(await readFile('content/site.json', 'utf8'));
   assert.doesNotThrow(() => padletUrl(site.padletUrl));
   assert.match(site.contactEmail, /^[^@\s]+@[^@\s]+\.[^@\s]+$/);
+  assert.ok(mediaPath(site.contactImage));
+  assert.ok(site.contactAlt.length > 0);
   for (const file of await readdir('content/videos')) {
     const entry = JSON.parse(await readFile(`content/videos/${file}`, 'utf8'));
     assert.ok(youtubeId(entry.youtube));

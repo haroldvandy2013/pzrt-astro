@@ -30,6 +30,8 @@ const videos = defineCollection({
     }, 'Enter a valid YouTube video ID or HTTPS YouTube link.'),
     order: z.number().int().nonnegative(),
     draft: z.boolean().default(false),
+    duration: z.preprocess((value) => value === '' ? undefined : value, z.string().regex(/^(?:\d{1,2}:)?\d{2}:\d{2}$/).optional()),
+    description: z.string().optional(),
   }),
 });
 

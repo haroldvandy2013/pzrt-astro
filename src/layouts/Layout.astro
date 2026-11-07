@@ -7,7 +7,7 @@ interface Props {
   description?: string;
   image?: string;
 }
-const { title, description = site.tagline, image = site.heroImage } = Astro.props;
+const { title, description = site.tagline, image = site.contactImage } = Astro.props;
 const path = Astro.url.pathname;
 const navigation = [
   { label: 'Home', url: '/' },
@@ -25,7 +25,7 @@ const socialImage = new URL(href(image), Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title === 'Home' ? site.name : `${title} | ${site.name}`}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#14284a" />
+    <meta name="theme-color" content="#122653" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={href('/favicon.svg')} />
     <meta property="og:type" content="website" />
@@ -36,35 +36,30 @@ const socialImage = new URL(href(image), Astro.site);
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
-    <div class="mission-strip"><span>{site.tagline}</span></div>
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href={href('/')} aria-label={`${site.name} — home`}>
-          <img src={href(site.logo)} alt="" width="74" height="50" />
-          <span>People’s Zoom<br /><strong>Readers Theater</strong></span>
+          <img src={href(site.logo)} alt="" width="129" height="87" />
+          <span class="brand-text"><span class="brand-name">{site.name}</span><span class="brand-tagline">{site.tagline}</span></span>
         </a>
         <button class="menu-toggle" aria-expanded="false" aria-controls="site-navigation">Menu <span aria-hidden="true">☰</span></button>
         <nav id="site-navigation" aria-label="Main navigation">
           {navigation.map(({ label, url }) => (
             <a href={href(url)} aria-current={path === href(url) || (url === '/blog/' && path.includes('/post/')) ? 'page' : undefined}>{label}</a>
           ))}
-          <a class="contact-nav" href={contactHref}>Contact Us <span aria-hidden="true">↗</span></a>
+          <a href={contactHref}>Contact Us</a>
         </nav>
       </div>
     </header>
     <main id="main" tabindex="-1"><slot /></main>
-    <section class="get-involved">
-      <div class="container involved-inner">
-        <div><span class="eyebrow">A conversation starts with you</span><h2>Get involved.</h2><p>{site.contactText}</p></div>
-        <a class="button button-light" href={contactHref}>Email {site.contactName.split(' ')[0]} <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
     <footer class="site-footer">
-      <div class="container footer-inner">
-        <div><strong>{site.name}</strong><p>{site.tagline}</p></div>
-        <div class="footer-links"><a href={channelUrl} target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a><a href={contactHref}>{site.contactEmail}</a></div>
+      <div class="footer-socials" aria-label="Social media">
+        <a href="https://www.facebook.com/Peoples-Zoom-Readers-Theater-100664028686156" target="_blank" rel="noopener noreferrer" aria-label="Facebook (opens in a new tab)"><img src={href('/media/facebook.png')} alt="" width="20" height="20" /></a>
+        <a href="https://twitter.com/pzrt2014" target="_blank" rel="noopener noreferrer" aria-label="Twitter (opens in a new tab)"><img src={href('/media/twitter.png')} alt="" width="20" height="20" /></a>
+        <a href="https://www.linkedin.com/company/peoples-zoom-readers-theater" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><img src={href('/media/linkedin.png')} alt="" width="20" height="20" /></a>
+        <a href={channelUrl} target="_blank" rel="noopener noreferrer" aria-label="YouTube (opens in a new tab)"><img src={href('/media/youtube.png')} alt="" width="20" height="20" /></a>
       </div>
-      <div class="container footer-bottom"><span>© {new Date().getFullYear()} {site.name}</span><span>Migration preview · Original site remains at <a href="https://www.pzrt.org/">pzrt.org</a></span></div>
+      <p>©{new Date().getFullYear()} by {site.name}.</p>
     </footer>
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');

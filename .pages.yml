@@ -47,6 +47,7 @@ content:
       - name: draft
         label: Draft (hide from the website)
         type: boolean
+
       - name: body
         label: Article text
         type: rich-text
@@ -96,6 +97,13 @@ content:
         options:
           min: 0
           step: 1
+      - name: duration
+        label: Video duration (optional)
+        type: string
+        pattern: '^$|^(?:\d{1,2}:)?\d{2}:\d{2}$'
+      - name: description
+        label: Video description (optional)
+        type: text
       - name: draft
         label: Draft (hide from the website)
         type: boolean
@@ -123,12 +131,12 @@ content:
         label: Logo
         type: image
         required: true
-      - name: heroImage
-        label: Homepage main image
+      - name: contactImage
+        label: Get Involved illustration
         type: image
         required: true
-      - name: heroAlt
-        label: Main image description
+      - name: contactAlt
+        label: Get Involved image description
         type: string
         required: true
       - name: gallery

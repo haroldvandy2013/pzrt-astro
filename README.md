@@ -8,6 +8,8 @@
 
 Astro + Pages CMS + GitHub Pages，全静态网站，为之后从 Wix 迁移做准备。现在仍使用 GitHub 的项目网址，**没有修改 www.pzrt.org 的 DNS 或原 Wix 网站**。
 
+排版遵循原 Wix 网站：深蓝页眉、Logo 与 Dancing Script 组织名称、Jura 导航/标语、金色标题与页脚；首页按 Who We Are → 单张海报轮播及缩略图 → Get Involved 的原顺序呈现。视频保持两列，文章保持三列卡片（小屏自适应）。不再使用重新设计的宣传大标题或首页文章区。保留已确认的邮件联系、去掉聊天/表单和空 Padlet 状态。
+
 ## 非前端维护者：从这里开始
 
 1. 打开 [Pages CMS](https://app.pagescms.org/)，用有此仓库写入权限的 GitHub 账号登录。
@@ -34,7 +36,7 @@ Astro + Pages CMS + GitHub Pages，全静态网站，为之后从 Wix 迁移做�
 
 ### 首页、联系信息、图片
 
-在 **Homepage, contact & bulletin wall** 编辑介绍段落、主要照片、海报轮播和联系信息。保留准确的图片描述，方便屏幕阅读器用户。
+在 **Homepage, contact & bulletin wall** 编辑介绍段落、Get Involved 插图、海报轮播和联系信息。保留准确的图片描述，方便屏幕阅读器用户。海报按列表顺序展示，可点箭头或缩略图切换，也支持键盘左右键。
 
 联系地址目前为 `fingerag@drexel.edu`，Contact Us 是邮件链接。没有 Wix Let's Chat、注册表单或提交表单。
 
@@ -80,6 +82,10 @@ Astro + Pages CMS + GitHub Pages，全静态网站，为之后从 Wix 迁移做�
 | evolution.jpg | a76bb0_718e92bcc83842dfa4a974ded7a93a81~mv2.jpg |
 | zoom-enchanted.jpg | a76bb0_14ea33d60aaf4d50b565807e47dfff3b~mv2.jpg |
 | first-performance.jpg | a76bb0_1a189971713a4a1bae9271a45773edfc~mv2.jpg |
+| supreme-court-poster.png | a76bb0_a57bd1aa41bc4038a0e50900850029f1~mv2.png |
+| no-shame-poster.jpg | a76bb0_8365980c00214441903d0100a6e11470~mv2.jpg |
+| just-one-more-poster.png | a76bb0_2f54bd5f071e44959563bde7eea1b487~mv2.png |
+| get-involved.png | a76bb0_fe8dc36981c8431991525d570b2e12c7~mv2.png |
 
 ## 开发与部署
 

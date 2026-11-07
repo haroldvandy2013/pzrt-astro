@@ -7,17 +7,27 @@
     "Above all, we aim to provide a venue for those who wish to share their thoughts on critical topics."
   ],
   "logo": "/media/pzrt-logo.jpg",
-  "heroImage": "/media/zoom-rehearsal.png",
-  "heroAlt": "Members of People's Zoom Readers Theater rehearsing together on Zoom",
+  "contactImage": "/media/get-involved.png",
+  "contactAlt": "PZRT artwork: We Care as We Share What is Behind the Pandemic Mask",
   "contactName": "Alexis Gerard Finger",
   "contactEmail": "fingerag@drexel.edu",
   "contactText": "Get in touch with People's Zoom Readers Theater to learn more about our work and how you can get involved.",
   "padletUrl": "",
   "gallery": [
     {
+      "image": "/media/supreme-court-poster.png",
+      "alt": "PZRT Supreme Court performance poster: Saved the World, Saved the Galaxy, But Can They Save This?",
+      "caption": "The UnSupreme Court"
+    },
+    {
       "image": "/media/rising-setting-sun.png",
       "alt": "PZRT poster for 1776–2026: Rising or Setting Sun",
       "caption": "1776–2026: Rising or Setting Sun"
+    },
+    {
+      "image": "/media/no-shame-poster.jpg",
+      "alt": "PZRT No Shame performance poster",
+      "caption": "No Shame"
     },
     {
       "image": "/media/no-time-to-give-up.png",
@@ -25,9 +35,9 @@
       "caption": "No Time to Give Up"
     },
     {
-      "image": "/media/clybourne-park.png",
-      "alt": "PZRT poster for Clybourne Park: We Could Be Better",
-      "caption": "Clybourne Park: We Could Be Better"
+      "image": "/media/just-one-more-poster.png",
+      "alt": "PZRT Just One More, Please performance poster",
+      "caption": "Just One More, Please"
     }
   ]
 }
