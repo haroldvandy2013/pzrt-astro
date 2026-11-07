@@ -38,7 +38,7 @@ Astro + Pages CMS + GitHub Pages，全静态网站，为之后从 Wix 迁移做�
 
 在 **Homepage, contact & bulletin wall** 编辑介绍段落、Get Involved 插图、海报轮播和联系信息。保留准确的图片描述，方便屏幕阅读器用户。海报按列表顺序展示，可点箭头或缩略图切换，也支持键盘左右键。
 
-联系地址目前为 `fingerag@drexel.edu`，Contact Us 是邮件链接。没有 Wix Let's Chat、注册表单或提交表单。
+联系地址目前为 `readerstheater2014@gmail.com`，Contact Us 是邮件链接。文章中原来指向 Alexis 的旧邮箱也已更新为此地址。没有 Wix Let's Chat、注册表单或提交表单。
 
 图片上传目录为 `public/media`，只接受常见图片格式；封面和首页图片在构建时生成响应式 WebP。图片有版权，请仅上传有授权的素材。原站图片使用原始全尺寸文件下载，不使用 Wix 的模糊占位缩略图。
 

@@ -53,7 +53,7 @@ When Drexel went online as a result of the pandemic (spring 2020), we evolved in
 
 We are currently working on *“The UnSupreme Court”* and *“What It’s Like to Be Me in Times Like These”.*
 
-We are always looking to expand our membership and our audiences. If you are interested in learning more, contact Alexis Finger ([fingerag@drexel.edu](mailto:fingerag@drexel.edu)).
+We are always looking to expand our membership and our audiences. If you are interested in learning more, contact Alexis Finger ([readerstheater2014@gmail.com](mailto:readerstheater2014@gmail.com)).
 
 Aug. 06, 2026
 

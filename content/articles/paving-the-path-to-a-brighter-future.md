@@ -9,4 +9,4 @@ draft: false
 sourceUrl: https://www.pzrt.org/post/paving-the-path-to-a-brighter-future
 migrationStatus: complete
 ---
-Please feel free to contact Alexis ([fingerag@drexel.edu](mailto:fingerag@drexel.edu)) or Yvonne ([yl3335@drexel.edu](mailto:yl3335@drexel.edu)) if you want to offer any contributions. Thank you :)
+Please feel free to contact Alexis ([readerstheater2014@gmail.com](mailto:readerstheater2014@gmail.com)) or Yvonne ([yl3335@drexel.edu](mailto:yl3335@drexel.edu)) if you want to offer any contributions. Thank you :)
