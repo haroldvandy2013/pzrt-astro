@@ -211,6 +211,7 @@ h3 { font-size: 22px; line-height: 1.4; font-weight: 500; }
   .brand-name { font-size: 26px; line-height: 1.35; white-space: normal; }
   .brand-tagline { font-size: 17px; line-height: 1.875; max-width: 300px; margin: 30px auto 0; white-space: normal; }
   .menu-toggle { display: block; position: absolute; top: 32px; right: 24px; width: 40px; margin: 0; padding: 4px; border: 1px solid #3868ff; background: #fff; color: #0000ff; font: 12px/15px Arial, sans-serif; letter-spacing: 4px; word-break: break-all; text-transform: uppercase; }
+  .menu-toggle span[aria-hidden] { display: none; }
   .site-header nav { flex-direction: column; text-align: center; margin-top: 20px; padding-top: 12px; }
   .site-header nav.js-ready:not(.is-open) { display: none; }
   .site-header nav a { padding-block: 7px; }
@@ -218,6 +219,7 @@ h3 { font-size: 22px; line-height: 1.4; font-weight: 500; }
   .intro-content { max-width: 330px; text-align: center; }
   .intro-content h1 { font-size: 24px; margin-bottom: 14px; }
   .intro-content p { color: #000; font-size: 18px; line-height: 1.875; margin-bottom: 38px; }
+  .intro-accent { color: inherit; }
   .poster-carousel { margin-top: 30px; }
   .poster-stage { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; }
   .poster-slide { flex: 0 0 auto; scroll-snap-align: start; }
