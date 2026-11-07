@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site, contactHref } from '../lib/site';
+import { padletUrl } from '../lib/urls.mjs';
+const board = padletUrl(site.padletUrl);
+const boardPath = board ? new URL(board).pathname : '';
+const boardId = boardPath.split('/').filter(Boolean).at(-1);
+const embed = boardPath.startsWith('/embed/') ? board : `https://padlet.com/embed/${boardId}`;
+---
+<Layout title="Bulletin Wall" description="A shared space for People's Zoom Readers Theater community conversations.">
+  <section class="page-heading container"><span class="eyebrow">A space for our community</span><h1>The bulletin<br /><em>wall.</em></h1><p>Thoughts from our audience. Connections beyond the stage.</p></section>
+  <section class="container section section-topless">
+    {board ? (
+      <div class="padlet-board"><iframe src={embed} title="PZRT community bulletin wall on Padlet" loading="lazy" allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe><p>Having trouble viewing the board? <a class="text-link" href={board} target="_blank" rel="noopener noreferrer">Open it on Padlet <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></p></div>
+    ) : (
+      <div class="empty-board">
+        <div class="empty-board-art" aria-hidden="true"><span class="paper paper-one"></span><span class="paper paper-two"></span><span class="paper paper-three"></span></div>
+        <span class="status-label"><span class="live-dot"></span> Not connected yet</span>
+        <h2>A fresh wall.<br />A new conversation.</h2>
+        <p>This space is intentionally empty while we prepare a new Padlet board. No messages have been imported, and posting is not available yet.</p>
+        <p class="empty-board-detail">The board will appear here once it has been created and connected. In the meantime, we’d love to hear from you by email.</p>
+        <a class="button" href={contactHref}>Get in touch <span aria-hidden="true">↗</span></a>
+      </div>
+    )}
+  </section>
+</Layout>

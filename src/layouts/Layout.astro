@@ -1,0 +1,87 @@
+---
+import { site, href, contactHref, channelUrl } from '../lib/site';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+const { title, description = site.tagline, image = site.heroImage } = Astro.props;
+const path = Astro.url.pathname;
+const navigation = [
+  { label: 'Home', url: '/' },
+  { label: 'Performance Videos', url: '/videos/' },
+  { label: 'Articles', url: '/blog/' },
+  { label: 'Bulletin Wall', url: '/bulletin-wall-2021/' },
+];
+const canonical = new URL(path, Astro.site);
+const socialImage = new URL(href(image), Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title === 'Home' ? site.name : `${title} | ${site.name}`}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#14284a" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={href('/favicon.svg')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} | ${site.name}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <div class="mission-strip"><span>{site.tagline}</span></div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href={href('/')} aria-label={`${site.name} — home`}>
+          <img src={href(site.logo)} alt="" width="74" height="50" />
+          <span>People’s Zoom<br /><strong>Readers Theater</strong></span>
+        </a>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="site-navigation">Menu <span aria-hidden="true">☰</span></button>
+        <nav id="site-navigation" aria-label="Main navigation">
+          {navigation.map(({ label, url }) => (
+            <a href={href(url)} aria-current={path === href(url) || (url === '/blog/' && path.includes('/post/')) ? 'page' : undefined}>{label}</a>
+          ))}
+          <a class="contact-nav" href={contactHref}>Contact Us <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1"><slot /></main>
+    <section class="get-involved">
+      <div class="container involved-inner">
+        <div><span class="eyebrow">A conversation starts with you</span><h2>Get involved.</h2><p>{site.contactText}</p></div>
+        <a class="button button-light" href={contactHref}>Email {site.contactName.split(' ')[0]} <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div><strong>{site.name}</strong><p>{site.tagline}</p></div>
+        <div class="footer-links"><a href={channelUrl} target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a><a href={contactHref}>{site.contactEmail}</a></div>
+      </div>
+      <div class="container footer-bottom"><span>© {new Date().getFullYear()} {site.name}</span><span>Migration preview · Original site remains at <a href="https://www.pzrt.org/">pzrt.org</a></span></div>
+    </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.getElementById('site-navigation');
+      nav?.classList.add('js-ready');
+      toggle?.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        nav?.classList.toggle('is-open', !expanded);
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+          toggle.setAttribute('aria-expanded', 'false');
+          nav?.classList.remove('is-open');
+          toggle.focus();
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site, contactHref } from '../lib/site';
+---
+<Layout title="Contact Us">
+  <section class="page-heading container"><span class="eyebrow">Get involved</span><h1>Let’s start a<br /><em>conversation.</em></h1><p>{site.contactText}</p></section>
+  <section class="container section section-topless">
+    <div class="contact-card"><span class="eyebrow">Contact</span><h2>{site.contactName}</h2><a class="contact-email" href={contactHref}>{site.contactEmail} <span aria-hidden="true">↗</span></a><p>Your email app will open when you select the address. There is no signup or submission form on this website.</p></div>
+  </section>
+</Layout>

@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import MediaImage from '../../components/MediaImage.astro';
+import { href, dateLabel } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  return articles.map((article) => ({ params: { id: article.id }, props: { article } }));
+}
+interface Props { article: CollectionEntry<'articles'>; }
+const { article } = Astro.props;
+const { Content } = await render(article);
+---
+<Layout title={article.data.title} description={article.data.summary} image={article.data.cover}>
+  <article class="article-page container">
+    <a class="text-link back-link" href={href('/blog/')}><span aria-hidden="true">←</span> All articles</a>
+    <header class="article-header"><span class="eyebrow">Community voices</span><h1>{article.data.title}</h1><div class="article-meta"><span>{article.data.author}</span><span aria-hidden="true">·</span><time datetime={article.data.date.toISOString()}>{dateLabel(article.data.date)}</time></div></header>
+    <MediaImage class="article-cover" src={article.data.cover} alt={article.data.coverAlt} eager width={1200} sizes="(min-width: 1000px) 900px, 90vw" />
+    {article.data.migrationStatus === 'excerpt' && <aside class="preview-note">This is a selected excerpt for the migration preview, not the complete article. {article.data.sourceUrl && <a href={article.data.sourceUrl} target="_blank" rel="noopener noreferrer">Read the full original on pzrt.org <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>}</aside>}
+    <div class="prose"><Content /></div>
+    {article.data.sourceUrl && <div class="article-source"><span>Originally published on pzrt.org.</span><a href={article.data.sourceUrl} target="_blank" rel="noopener noreferrer">View original <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></div>}
+  </article>
+</Layout>

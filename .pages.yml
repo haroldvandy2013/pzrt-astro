@@ -1,0 +1,168 @@
+media:
+  input: public/media
+  output: /media
+  extensions: [jpg, jpeg, png, webp, gif]
+  rename: safe
+
+content:
+  - name: articles
+    label: Articles
+    type: collection
+    path: content/articles
+    format: yaml-frontmatter
+    subfolders: false
+    filename: '{primary}.md'
+    view:
+      primary: title
+      fields: [title, date, author, draft]
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Article title
+        type: string
+        required: true
+      - name: date
+        label: Publication date
+        type: date
+        required: true
+      - name: author
+        label: Author
+        type: string
+        required: true
+      - name: summary
+        label: Short introduction
+        type: text
+        required: true
+        options:
+          maxlength: 500
+      - name: cover
+        label: Cover image
+        type: image
+        required: true
+      - name: coverAlt
+        label: Describe the image for screen readers
+        type: string
+        required: true
+      - name: draft
+        label: Draft (hide from the website)
+        type: boolean
+      - name: body
+        label: Article text
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+      - name: sourceUrl
+        label: Original Wix article (migration only)
+        type: string
+        pattern: '^https://www\.pzrt\.org/post/[a-z0-9-]+/?$'
+      - name: migrationStatus
+        label: Migration status
+        type: select
+        description: For a new article choose complete. Choose excerpt only when the original text has not all been imported.
+        options:
+          values: [complete, excerpt]
+
+  - name: videos
+    label: Performance videos
+    type: collection
+    path: content/videos
+    format: json
+    subfolders: false
+    filename: '{primary}.json'
+    view:
+      primary: title
+      fields: [title, order, draft]
+      sort: order
+      order: asc
+    fields:
+      - name: title
+        label: Performance title
+        type: string
+        required: true
+      - name: youtube
+        label: YouTube video link or ID
+        type: string
+        required: true
+        description: Paste an HTTPS youtube.com/watch?v= link, youtu.be link, or the 11-character ID. Never upload a video file.
+        pattern:
+          regex: '^(?:[A-Za-z0-9_-]{11}|https://youtu\.be/[A-Za-z0-9_-]{11}(?:\?[^\s]*)?|https://(?:www\.|m\.)?youtube\.com/watch\?v=[A-Za-z0-9_-]{11}(?:&[^\s]*)?|https://(?:www\.|m\.)?youtube\.com/(?:shorts|embed)/[A-Za-z0-9_-]{11}/?(?:\?[^\s]*)?)$'
+          message: Use a YouTube video link or an 11-character video ID.
+      - name: order
+        label: Display order (smaller numbers first)
+        type: number
+        required: true
+        options:
+          min: 0
+          step: 1
+      - name: draft
+        label: Draft (hide from the website)
+        type: boolean
+
+  - name: site
+    label: Homepage, contact & bulletin wall
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: name
+        label: Organization name
+        type: string
+        required: true
+      - name: tagline
+        label: Mission / tagline
+        type: string
+        required: true
+      - name: intro
+        label: Who we are — paragraphs
+        type: text
+        list: true
+        required: true
+      - name: logo
+        label: Logo
+        type: image
+        required: true
+      - name: heroImage
+        label: Homepage main image
+        type: image
+        required: true
+      - name: heroAlt
+        label: Main image description
+        type: string
+        required: true
+      - name: gallery
+        label: Performance poster carousel
+        type: object
+        list: true
+        fields:
+          - name: image
+            type: image
+            required: true
+          - name: alt
+            label: Image description
+            type: string
+            required: true
+          - name: caption
+            type: string
+            required: true
+      - name: contactName
+        label: Contact person
+        type: string
+        required: true
+      - name: contactEmail
+        label: Contact email
+        type: string
+        required: true
+        pattern: '^[^@\s]+@[^@\s]+\.[^@\s]+$'
+      - name: contactText
+        label: Invitation to get involved
+        type: text
+        required: true
+      - name: padletUrl
+        label: New Padlet board URL (leave empty until created)
+        type: string
+        description: Create a NEW empty board in your Padlet account. Paste its HTTPS board or embed URL here. No API keys.
+        pattern:
+          regex: '^$|^https://padlet\.com/(?:embed/)?[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)?/?$'
+          message: Use an HTTPS padlet.com board URL without query parameters, or leave empty.

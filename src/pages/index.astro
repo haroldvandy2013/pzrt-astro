@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import MediaImage from '../components/MediaImage.astro';
+import { site, href } from '../lib/site';
+const publishedArticles = await getCollection('articles', ({ data }) => !data.draft);
+const story = publishedArticles.find((article) => article.id === 'the-story-of-pzrt');
+const articles = publishedArticles.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+---
+<Layout title="Home">
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="small-rule"></span> People’s Zoom Readers Theater</span>
+        <h1>Many voices.<br />One shared<br /><em>humanity.</em></h1>
+        <p>{site.tagline}.</p>
+        <div class="hero-actions"><a class="button" href={href('/videos/')}>Watch our performances <span aria-hidden="true">↗</span></a><a class="text-link" href="#who-we-are">Meet PZRT <span aria-hidden="true">↓</span></a></div>
+      </div>
+      <div class="hero-visual">
+        <div class="image-label"><span class="live-dot"></span> Together, through drama</div>
+        <MediaImage src={site.heroImage} alt={site.heroAlt} eager width={1000} sizes="(min-width: 900px) 50vw, 90vw" />
+        <div class="hero-caption"><span>Different rooms. Shared purpose.</span><span aria-hidden="true">PZRT /</span></div>
+      </div>
+    </div>
+  </section>
+  <section id="who-we-are" class="section about-section">
+    <div class="container about-grid">
+      <div><span class="eyebrow">Who we are</span><h2>Drama brings us<br /><em>together.</em></h2>{story && <a class="text-link" href={href(`/post/${story.id}/`)}>The story of PZRT <span aria-hidden="true">↗</span></a>}</div>
+      <div class="about-copy">{site.intro.map((paragraph) => <p>{paragraph}</p>)}</div>
+    </div>
+  </section>
+  <section class="section poster-section">
+    <div class="container">
+      <div class="section-heading"><div><span class="eyebrow">On our virtual stage</span><h2>Stories worth sharing.</h2></div><a class="text-link" href={href('/videos/')}>Performance videos <span aria-hidden="true">↗</span></a></div>
+      <div class="poster-carousel" aria-label="Performance posters" tabindex="0">
+        {site.gallery.map((item) => <figure><MediaImage src={item.image} alt={item.alt} width={960} sizes="(min-width: 900px) 43vw, 85vw" /><figcaption>{item.caption}</figcaption></figure>)}
+      </div>
+      <div class="carousel-hint"><span>Explore our performance posters</span><span>Scroll to see more <span aria-hidden="true">→</span></span></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-heading"><div><span class="eyebrow">From our community</span><h2>Thoughts beyond the stage.</h2></div><a class="text-link" href={href('/blog/')}>All articles <span aria-hidden="true">↗</span></a></div>
+      <div class="card-grid">{articles.map((article) => <ArticleCard article={article} />)}</div>
+    </div>
+  </section>
+</Layout>

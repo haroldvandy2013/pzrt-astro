@@ -1,0 +1,7 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { href } from '../lib/site';
+---
+<Layout title="Page not found">
+  <section class="page-heading container"><span class="eyebrow">404</span><h1>This page isn’t<br /><em>on the stage.</em></h1><p>The page may have moved or hasn’t been migrated yet.</p><a class="button" href={href('/')}>Back to home <span aria-hidden="true">→</span></a></section>
+</Layout>

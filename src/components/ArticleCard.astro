@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import MediaImage from './MediaImage.astro';
+import { href, dateLabel } from '../lib/site';
+
+interface Props { article: CollectionEntry<'articles'>; }
+const { article } = Astro.props;
+---
+<article class="article-card">
+  <a class="card-image-link" href={href(`/post/${article.id}/`)} tabindex="-1" aria-hidden="true">
+    <MediaImage src={article.data.cover} alt="" width={640} sizes="(min-width: 900px) 30vw, (min-width: 600px) 45vw, 90vw" />
+  </a>
+  <div class="card-body">
+    <time datetime={article.data.date.toISOString()}>{dateLabel(article.data.date)}</time>
+    <h3><a href={href(`/post/${article.id}/`)}>{article.data.title}</a></h3>
+    <p>{article.data.summary}</p>
+    <a class="text-link" href={href(`/post/${article.id}/`)}>Read article <span aria-hidden="true">↗</span><span class="sr-only">: {article.data.title}</span></a>
+  </div>
+</article>

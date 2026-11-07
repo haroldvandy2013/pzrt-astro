@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import VideoCard from '../components/VideoCard.astro';
+import { channelUrl } from '../lib/site';
+const videos = (await getCollection('videos', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order || a.id.localeCompare(b.id));
+---
+<Layout title="Performance Videos" description="Watch People's Zoom Readers Theater performances on YouTube.">
+  <section class="page-heading container"><span class="eyebrow">Our virtual stage</span><h1>Performance<br /><em>videos.</em></h1><p>Come together through drama. Watch, reflect, and join the conversation.</p></section>
+  <section class="container section section-topless">
+    <div class="archive-note"><p>This migration preview features a selection of performances, not the complete archive. Explore more on our YouTube channel.</p><a class="button button-outline" href={channelUrl} target="_blank" rel="noopener noreferrer">Visit our channel <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></div>
+    <p class="video-privacy">Videos load from YouTube only when you choose “Play here”. You can always open the direct YouTube link.</p>
+    <div class="video-grid">{videos.map((video) => <VideoCard video={video} />)}</div>
+    {videos.length === 0 && <p>No performances are published yet. Visit our YouTube channel above.</p>}
+  </section>
+</Layout>
