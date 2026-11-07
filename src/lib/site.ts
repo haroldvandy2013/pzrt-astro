@@ -28,5 +28,5 @@ export const site = z.object({
 export const href = (path: string) => withBase(path, import.meta.env.BASE_URL);
 export const contactHref = `mailto:${site.contactEmail}`;
 export const channelUrl = 'https://www.youtube.com/channel/UC7GZ0ZlejLcISfFaFMy5Rdw';
-export const dateLabel = (date: Date) =>
-  new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(date);
+export const dateLabel = (date: Date, includeYear = date.getUTCFullYear() !== new Date().getUTCFullYear()) =>
+  new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', ...(includeYear ? { year: 'numeric' } : {}), timeZone: 'UTC' }).format(date);

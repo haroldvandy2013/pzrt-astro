@@ -11,7 +11,51 @@ const videos = (await getCollection('videos', ({ data }) => !data.draft))
   <section class="container video-archive">
     <div class="archive-toolbar"><span>All Videos</span></div>
     <div class="video-grid">{videos.map((video) => <VideoCard video={video} />)}</div>
-    {videos.length === 0 && <p>No performances are published yet. Visit our YouTube channel above.</p>}
-    <div class="archive-footnote"><a href={channelUrl} target="_blank" rel="noopener noreferrer">More videos on YouTube <span class="sr-only"> (opens in a new tab)</span></a><p>This preview includes a selection, not the complete archive. Videos load from YouTube when you choose “Play here”.</p></div>
+    {videos.length === 0 && <p>No performances are published yet. <a href={channelUrl} target="_blank" rel="noopener noreferrer">Visit our YouTube channel.</a></p>}
+    <div class="video-more"><button hidden class="load-more-videos">Load More</button></div>
   </section>
+  <dialog class="video-dialog" aria-labelledby="video-dialog-title">
+    <button class="close-video" aria-label="Close video">×</button>
+    <div class="video-dialog-content"><div class="video-dialog-player"></div><div class="video-dialog-copy"><h2 id="video-dialog-title"></h2><p class="video-dialog-description"></p><a class="video-youtube-link" target="_blank" rel="noopener noreferrer">Watch on YouTube</a></div></div>
+  </dialog>
 </Layout>
+<script>
+  import { createYouTubePlayer } from '../lib/youtube-player';
+  const cards = [...document.querySelectorAll<HTMLElement>('.video-card')];
+  const more = document.querySelector<HTMLButtonElement>('.load-more-videos');
+  let visible = 6;
+  const update = () => {
+    cards.forEach((card, index) => { card.hidden = index >= visible; });
+    if (more) more.hidden = visible >= cards.length;
+  };
+  update();
+  more?.addEventListener('click', () => { visible += 6; update(); });
+  const dialog = document.querySelector<HTMLDialogElement>('.video-dialog');
+  const player = document.querySelector<HTMLElement>('.video-dialog-player');
+  const title = document.getElementById('video-dialog-title');
+  const description = document.querySelector<HTMLElement>('.video-dialog-description');
+  const link = document.querySelector<HTMLAnchorElement>('.video-youtube-link');
+  if (dialog && player && title && description && link) {
+    const open = (card: HTMLElement, button: HTMLButtonElement) => {
+      const { videoId, videoTitle } = button.dataset;
+      if (!videoId || !/^[A-Za-z0-9_-]{11}$/.test(videoId) || !videoTitle) throw new Error('Invalid YouTube video entry.');
+      player.replaceChildren(createYouTubePlayer(videoId, videoTitle));
+      title.textContent = videoTitle;
+      description.textContent = card.querySelector('.full-video-description')?.textContent || '';
+      link.href = `https://www.youtube.com/watch?v=${videoId}`;
+      dialog.showModal();
+    };
+    cards.forEach((card) => {
+      const button = card.querySelector<HTMLButtonElement>('.video-load');
+      if (!button) throw new Error('Video play button is missing.');
+      button.hidden = false;
+      button.addEventListener('click', () => open(card, button));
+      card.querySelector('.video-title-link')?.addEventListener('click', (event) => {
+        event.preventDefault();
+        open(card, button);
+      });
+    });
+    document.querySelector('.close-video')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('close', () => player.replaceChildren());
+  }
+</script>

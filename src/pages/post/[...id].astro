@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import MediaImage from '../../components/MediaImage.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
 import { href, dateLabel } from '../../lib/site';
 
 export async function getStaticPaths() {
@@ -12,14 +13,67 @@ export async function getStaticPaths() {
 interface Props { article: CollectionEntry<'articles'>; }
 const { article } = Astro.props;
 const { Content } = await render(article);
+const recent = (await getCollection('articles', ({ data }) => !data.draft))
+  .filter((entry) => entry.id !== article.id)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+const permalink = new URL(href(`/post/${article.id}/`), Astro.site).href;
 ---
 <Layout title={article.data.title} description={article.data.summary} image={article.data.cover}>
-  <article class="article-page container">
-    <a class="text-link back-link" href={href('/blog/')}><span aria-hidden="true">←</span> All articles</a>
-    <header class="article-header"><span class="eyebrow">Community voices</span><h1>{article.data.title}</h1><div class="article-meta"><span>{article.data.author}</span><span aria-hidden="true">·</span><time datetime={article.data.date.toISOString()}>{dateLabel(article.data.date)}</time></div></header>
-    <MediaImage class="article-cover" src={article.data.cover} alt={article.data.coverAlt} eager width={1200} sizes="(min-width: 1000px) 900px, 90vw" />
+  <div class="article-shell container">
+    <div class="archive-toolbar"><a href={href('/blog/')}>All Posts</a></div>
+    <article class="article-page">
+    <header class="article-header">
+      <div class="article-meta">
+        {article.data.avatar ? <img class="author-avatar" src={href(article.data.avatar)} alt="" width="32" height="32" /> : <span class="author-avatar default-avatar" aria-hidden="true"></span>}
+        <span>{article.data.author} · <time datetime={article.data.date.toISOString()}>{dateLabel(article.data.date)}</time>{article.data.readingMinutes && ` · ${article.data.readingMinutes} min read`}</span>
+      </div>
+      <h1>{article.data.title}</h1>
+      {article.data.updated && <p class="article-updated">Updated: {dateLabel(article.data.updated, true)}</p>}
+    </header>
+    {!article.data.originalLayout && <MediaImage class="article-cover" src={article.data.cover} alt={article.data.coverAlt} eager width={1200} sizes="(min-width: 1000px) 900px, 90vw" />}
     {article.data.migrationStatus === 'excerpt' && <aside class="preview-note">This is a selected excerpt for the migration preview, not the complete article. {article.data.sourceUrl && <a href={article.data.sourceUrl} target="_blank" rel="noopener noreferrer">Read the full original on pzrt.org <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>}</aside>}
-    <div class="prose"><Content /></div>
-    {article.data.sourceUrl && <div class="article-source"><span>Originally published on pzrt.org.</span><a href={article.data.sourceUrl} target="_blank" rel="noopener noreferrer">View original <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></div>}
+    <div class:list={['prose', { 'original-layout': article.data.originalLayout }]}><Content /></div>
+    <div class="article-share" aria-label="Share this article">
+      <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(permalink)}`} target="_blank" rel="noopener noreferrer" aria-label="Share via Facebook"><img src={href('/media/facebook.png')} alt="" width="16" height="16" /></a>
+      <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(permalink)}`} target="_blank" rel="noopener noreferrer" aria-label="Share via X (Twitter)"><img src={href('/media/twitter.png')} alt="" width="16" height="16" /></a>
+      <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(permalink)}`} target="_blank" rel="noopener noreferrer" aria-label="Share via LinkedIn"><img src={href('/media/linkedin.png')} alt="" width="16" height="16" /></a>
+      <button hidden class="copy-article-link" data-url={permalink} aria-label="Copy article link">↗</button>
+      <span class="copy-status" role="status"></span>
+    </div>
   </article>
+  <section class="recent-articles" aria-label="Recent Posts">
+    <div class="archive-toolbar"><span>Recent Posts</span><a href={href('/blog/')}>See All</a></div>
+    <div class="card-grid">{recent.map((entry) => <ArticleCard article={entry} compact />)}</div>
+  </section>
+  </div>
 </Layout>
+<script>
+  import { createYouTubePlayer } from '../../lib/youtube-player';
+  document.querySelectorAll<HTMLElement>('.source-video').forEach((video) => {
+    const id = video.dataset.youtubeId;
+    if (!id) throw new Error('Inline performance ID is missing.');
+    const button = document.createElement('button');
+    button.className = 'inline-video-play';
+    button.setAttribute('aria-label', 'Play video');
+    button.addEventListener('click', () => {
+      const title = document.querySelector('.article-header h1')?.textContent || 'PZRT performance';
+      video.replaceChildren(createYouTubePlayer(id, title));
+    });
+    video.append(button);
+  });
+  const copy = document.querySelector<HTMLButtonElement>('.copy-article-link');
+  const status = document.querySelector<HTMLElement>('.copy-status');
+  if (copy && navigator.clipboard) {
+    copy.hidden = false;
+    copy.addEventListener('click', async () => {
+      if (!copy.dataset.url) throw new Error('Article permalink is missing.');
+      try {
+        await navigator.clipboard.writeText(copy.dataset.url);
+        if (status) status.textContent = 'Link copied.';
+      } catch (error) {
+        console.error('Could not copy article link:', error);
+        if (status) status.textContent = 'Could not copy the link. Copy the address from your browser instead.';
+      }
+    });
+  }
+</script>

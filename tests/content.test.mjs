@@ -5,7 +5,9 @@ import { parse } from 'yaml';
 import { youtubeId, padletUrl, mediaPath, withBase, contentUrl } from '../src/lib/urls.mjs';
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import rehypeSanitize from 'rehype-sanitize';
+import rehypeRaw from 'rehype-raw';
 import { contentUrls } from '../src/lib/urls.mjs';
+import { articleHtmlSchema, contentHtmlUrls } from '../src/lib/markdown.mjs';
 
 test('YouTube accepts IDs and official HTTPS video URLs only', () => {
   for (const input of [
@@ -56,13 +58,33 @@ test('Internal URLs and CMS media work with project and future root base paths',
 test('Markdown rewrites CMS uploads and removes active HTML', async () => {
   const processor = await createMarkdownProcessor({
     remarkPlugins: [[contentUrls, { base: '/pzrt-astro/' }]],
-    rehypePlugins: [rehypeSanitize],
+    rehypePlugins: [rehypeRaw, [rehypeSanitize, articleHtmlSchema], [contentHtmlUrls, { base: '/pzrt-astro/' }]],
   });
   const result = await processor.render('![Photo](/media/photo.jpg)\n\n[Videos](https://www.pzrt.org/videos)\n\n<script>alert(1)</script>\n\n<img src="/media/photo.jpg" onerror="alert(1)">');
   assert.match(result.code, /\/pzrt-astro\/media\/photo\.jpg/);
   assert.match(result.code, /href="\/pzrt-astro\/videos"/);
   assert.doesNotMatch(result.code, /<script|onerror=/);
   await assert.rejects(() => processor.render('[Unsafe](javascript:alert(1))'));
+});
+
+test('Imported rich text preserves safe formatting, rewrites links, and rejects active markup', async () => {
+  const processor = await createMarkdownProcessor({
+    remarkPlugins: [[contentUrls, { base: '/pzrt-astro/' }]],
+    rehypePlugins: [rehypeRaw, [rehypeSanitize, articleHtmlSchema], [contentHtmlUrls, { base: '/pzrt-astro/' }]],
+  });
+  const result = await processor.render('<p class="source-size-24 evil" style="color:red"><strong>Original text</strong> <span class="source-background-86e5d1">highlight</span> <u>underline</u> <a href="https://www.pzrt.org/videos">Videos</a></p>\n<img src="/media/photo.jpg" onerror="alert(1)">\n<a href="javascript:alert(1)">Bad link</a>\n<script>alert(1)</script>');
+  assert.match(result.code, /class="source-size-24"/);
+  assert.match(result.code, /source-background-86e5d1/);
+  assert.match(result.code, /<strong>Original text<\/strong>/);
+  assert.match(result.code, /href="\/pzrt-astro\/videos"/);
+  assert.match(result.code, /src="\/pzrt-astro\/media\/photo.jpg"/);
+  assert.doesNotMatch(result.code, /style=|evil|onerror|javascript:|<script/);
+  assert.equal(contentUrl('http://example.org/resource', '/pzrt-astro/'), 'http://example.org/resource');
+  await assert.rejects(() => processor.render('<img src="//evil.test/image.png">'));
+  const inlineVideo = await processor.render('<div class="source-video" data-youtube-id="wzO0S1mRBJ8"></div>');
+  assert.match(inlineVideo.code, /data-youtube-id="wzO0S1mRBJ8"/);
+  assert.match((await processor.render('<h2 class="source-size-28 source-face-barlow-medium">Heading</h2>')).code, /source-size-28 source-face-barlow-medium/);
+  await assert.rejects(() => processor.render('<div class="source-video" data-youtube-id="invalid"></div>'));
 });
 
 test('CMS exposes maintainable files, article bodies and validated video fields', async () => {

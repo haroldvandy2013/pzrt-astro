@@ -3,18 +3,19 @@ import type { CollectionEntry } from 'astro:content';
 import MediaImage from './MediaImage.astro';
 import { href, dateLabel } from '../lib/site';
 
-interface Props { article: CollectionEntry<'articles'>; }
-const { article } = Astro.props;
+interface Props { article: CollectionEntry<'articles'>; compact?: boolean; }
+const { article, compact = false } = Astro.props;
 ---
-<article class="article-card">
+<article class:list={['article-card', { 'compact-card': compact }]}>
   <a class="card-image-link" href={href(`/post/${article.id}/`)} tabindex="-1" aria-hidden="true">
     <MediaImage src={article.data.cover} alt="" width={640} sizes="(min-width: 900px) 30vw, (min-width: 600px) 45vw, 90vw" />
   </a>
   <div class="card-body">
-    <span class="article-author">{article.data.author}</span>
-    <time datetime={article.data.date.toISOString()}>{dateLabel(article.data.date)}</time>
+    {!compact && <div class="card-author-row">
+      {article.data.avatar ? <img class="author-avatar" src={href(article.data.avatar)} alt="" width="32" height="32" loading="lazy" /> : <span class="author-avatar default-avatar" aria-hidden="true"></span>}
+      <div><span class="article-author">{article.data.author}</span><div class="card-date"><time datetime={article.data.date.toISOString()}>{dateLabel(article.data.date)}</time>{article.data.readingMinutes && <span> · {article.data.readingMinutes} min read</span>}</div></div>
+    </div>}
     <h3><a href={href(`/post/${article.id}/`)}>{article.data.title}</a></h3>
-    <p>{article.data.summary}</p>
-    <a class="text-link article-read-link" href={href(`/post/${article.id}/`)}>Read article<span class="sr-only">: {article.data.title}</span></a>
+    {!compact && <p>{article.data.summary}</p>}
   </div>
 </article>

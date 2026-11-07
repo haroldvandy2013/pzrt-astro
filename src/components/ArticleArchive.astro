@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ArticleCard from './ArticleCard.astro';
+import { href } from '../lib/site';
+
+interface Props { articles: CollectionEntry<'articles'>[]; page?: number; }
+const { articles, page = 1 } = Astro.props;
+const pageCount = Math.ceil(articles.length / 6);
+const pageHref = (number: number) => href(number === 1 ? '/blog/' : `/blog/page/${number}/`);
+---
+<h1 class="sr-only">Articles</h1>
+<section class="container article-archive" data-current-page={page}>
+  <div class="archive-toolbar"><span>All Posts</span><label class="article-search"><span class="search-icon" aria-hidden="true">⌕</span><span class="sr-only">Search articles</span><input type="search" placeholder="Search articles" /></label></div>
+  <div class="card-grid masonry-grid">
+    {articles.map((article, index) => <div class="article-search-item" hidden={Math.floor(index / 6) + 1 !== page} data-page={Math.floor(index / 6) + 1} data-search={`${article.data.title} ${article.data.author} ${article.data.summary}`.toLowerCase()}><ArticleCard article={article} /></div>)}
+  </div>
+  <p class="search-empty" hidden>No articles match your search.</p>
+  {articles.length === 0 && <p>No articles are published yet.</p>}
+  {pageCount > 1 && <nav class="article-pagination" aria-label="Article pages">
+    {page > 1 ? <a href={pageHref(page - 1)} aria-label="Previous page">‹</a> : <span aria-hidden="true">‹</span>}
+    {Array.from({ length: pageCount }, (_, index) => index + 1).map((number) => number === page ? <span aria-current="page" aria-label={`Page ${number}`}>{number}</span> : <a href={pageHref(number)} aria-label={`Page ${number}`}>{number}</a>)}
+    {page < pageCount ? <a href={pageHref(page + 1)} aria-label="Next page">›</a> : <span aria-hidden="true">›</span>}
+  </nav>}
+</section>
+<script>
+  const archive = document.querySelector<HTMLElement>('.article-archive');
+  const search = archive?.querySelector<HTMLInputElement>('.article-search input');
+  const grid = archive?.querySelector<HTMLElement>('.masonry-grid');
+  const items = [...document.querySelectorAll<HTMLElement>('.article-search-item')];
+  const empty = archive?.querySelector<HTMLElement>('.search-empty');
+  const pagination = archive?.querySelector<HTMLElement>('.article-pagination');
+  let scheduled = false;
+  const layout = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      grid?.classList.add('is-masonry');
+      items.filter((item) => !item.hidden).forEach((item) => {
+        const card = item.querySelector<HTMLElement>('.article-card');
+        if (card) item.style.gridRowEnd = `span ${Math.ceil(card.getBoundingClientRect().height + 32)}`;
+      });
+    });
+  };
+  if (typeof ResizeObserver !== 'undefined') {
+    const observer = new ResizeObserver(layout);
+    items.forEach((item) => {
+      const card = item.querySelector('.article-card');
+      if (card) observer.observe(card);
+    });
+    document.fonts.ready.then(layout);
+  }
+  search?.addEventListener('input', () => {
+    const query = search.value.trim().toLowerCase();
+    let visible = 0;
+    items.forEach((item) => {
+      item.hidden = query ? !item.dataset.search?.includes(query) : item.dataset.page !== archive?.dataset.currentPage;
+      if (!item.hidden) visible++;
+    });
+    if (empty) empty.hidden = visible > 0;
+    if (pagination) pagination.hidden = query.length > 0;
+    layout();
+  });
+</script>

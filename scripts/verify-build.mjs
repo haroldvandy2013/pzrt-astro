@@ -41,7 +41,8 @@ if (!settings.padletUrl) {
   assert.match(board, /Not connected yet/);
   assert.doesNotMatch(board, /<iframe/);
 } else {
-  assert.match(board, /https:\/\/padlet\.com\/embed\//);
+  assert.ok(board.includes(`src="${settings.padletUrl}"`));
+  assert.ok(board.includes(`href="${settings.padletUrl}"`));
 }
 const videos = await readFile('dist/videos/index.html', 'utf8');
 const videoFiles = await readdir('content/videos');

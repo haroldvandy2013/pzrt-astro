@@ -18,6 +18,10 @@ const articles = defineCollection({
       return url.origin === 'https://www.pzrt.org' && url.pathname.startsWith('/post/');
     }).optional()),
     migrationStatus: z.preprocess((value) => value === '' ? undefined : value, z.enum(['complete', 'excerpt']).default('complete')),
+    readingMinutes: z.number().int().positive().optional(),
+    updated: z.preprocess((value) => value === '' ? undefined : value, z.coerce.date().optional()),
+    avatar: z.preprocess((value) => value === '' ? undefined : value, z.string().refine(mediaPath).optional()),
+    originalLayout: z.boolean().default(false),
   }).refine((data) => data.migrationStatus !== 'excerpt' || !!data.sourceUrl, 'An excerpt must link to its original article.'),
 });
 

@@ -1,31 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import ArticleCard from '../components/ArticleCard.astro';
+import ArticleArchive from '../components/ArticleArchive.astro';
 const articles = (await getCollection('articles', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 <Layout title="Articles" description="Stories, reflections, and resources from People's Zoom Readers Theater.">
-  <h1 class="sr-only">Articles</h1>
-  <section class="container article-archive">
-    <div class="archive-toolbar"><span>All Posts</span><label class="article-search"><span class="sr-only">Search articles</span><input type="search" placeholder="Search articles" /></label></div>
-    <div class="card-grid">{articles.map((article) => <div class="article-search-item" data-search={`${article.data.title} ${article.data.author} ${article.data.summary}`.toLowerCase()}><ArticleCard article={article} /></div>)}</div>
-    <p class="search-empty" hidden>No articles match your search.</p>
-    {articles.length === 0 && <p>No articles are published yet.</p>}
-    <p class="archive-footnote">Migration preview: some articles are selected excerpts with links to the complete originals.</p>
-  </section>
+  <ArticleArchive articles={articles} />
 </Layout>
-<script>
-  const search = document.querySelector<HTMLInputElement>('.article-search input');
-  const items = [...document.querySelectorAll<HTMLElement>('.article-search-item')];
-  const empty = document.querySelector<HTMLElement>('.search-empty');
-  search?.addEventListener('input', () => {
-    const query = search.value.trim().toLowerCase();
-    let visible = 0;
-    items.forEach((item) => {
-      item.hidden = !item.dataset.search?.includes(query);
-      if (!item.hidden) visible++;
-    });
-    if (empty) empty.hidden = visible > 0;
-  });
-</script>

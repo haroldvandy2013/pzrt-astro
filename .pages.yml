@@ -44,6 +44,22 @@ content:
         label: Describe the image for screen readers
         type: string
         required: true
+      - name: avatar
+        label: Author photo (optional)
+        type: image
+      - name: readingMinutes
+        label: Reading time in minutes (optional)
+        type: number
+        options:
+          min: 1
+          step: 1
+      - name: updated
+        label: Last updated date (optional)
+        type: date
+      - name: originalLayout
+        label: Preserve original Wix article formatting
+        type: boolean
+        description: Enabled for imported articles. Leave off for new articles to use standard paragraph spacing.
       - name: draft
         label: Draft (hide from the website)
         type: boolean
@@ -168,9 +184,9 @@ content:
         type: text
         required: true
       - name: padletUrl
-        label: New Padlet board URL (leave empty until created)
+        label: Padlet board URL
         type: string
-        description: Create a NEW empty board in your Padlet account. Paste its HTTPS board or embed URL here. No API keys.
+        description: The existing PZRT board is connected. Keep its URL to retain the same messages. A replacement board must be created in your Padlet account. No API keys.
         pattern:
           regex: '^$|^https://padlet\.com/(?:embed/)?[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)?/?$'
           message: Use an HTTPS padlet.com board URL without query parameters, or leave empty.

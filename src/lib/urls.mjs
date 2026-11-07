@@ -63,7 +63,7 @@ export function contentUrl(value, base) {
   if (value.startsWith('/') && !value.startsWith('//')) return withBase(value, base);
   const url = new URL(value);
   if (url.protocol === 'mailto:' && !/[\r\n]/.test(decodeURIComponent(value))) return value;
-  if (url.protocol !== 'https:' || url.username || url.password) {
+  if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password) {
     throw new Error(`Unsupported content URL: ${value}`);
   }
   if (['www.pzrt.org', 'pzrt.org'].includes(url.hostname) &&

@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import ArticleArchive from '../../../components/ArticleArchive.astro';
+
+export async function getStaticPaths() {
+  const articles = (await getCollection('articles', ({ data }) => !data.draft))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return Array.from({ length: Math.max(0, Math.ceil(articles.length / 6) - 1) }, (_, index) => ({
+    params: { page: String(index + 2) },
+    props: { articles, page: index + 2 },
+  }));
+}
+interface Props { articles: CollectionEntry<'articles'>[]; page: number; }
+const { articles, page } = Astro.props;
+---
+<Layout title="Articles" description="Stories, reflections, and resources from People's Zoom Readers Theater.">
+  <ArticleArchive articles={articles} page={page} />
+</Layout>

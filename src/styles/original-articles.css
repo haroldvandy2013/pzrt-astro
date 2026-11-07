@@ -1,0 +1,79 @@
+@font-face {font-family: 'barlow-extralight'; font-style: normal; font-weight: 400; src: url('./fonts/51v0xj5VPw1cLYHNhfd8NFtXRa8TVwTICgirnJhmVJw.woff2') format('woff2');font-display: swap;
+}
+@font-face {font-family: 'barlow-extralight'; font-style: normal; font-weight: 700; src: url('./fonts/2woyxyDnPU0v4IiqYU9D1g.woff2') format('woff2');font-display: swap;
+}
+@font-face {font-family: 'barlow-extralight'; font-style: italic; font-weight: 700; src: url('./fonts/cdbGxfKO8gdkBd5U5TuXqPesZW2xOQ-xsNqO47m55DA.woff2') format('woff2');font-display: swap;
+}
+@font-face {font-family: 'barlow-extralight'; font-style: italic; font-weight: 400; src: url('./fonts/14AxwKgJhKIO-YYUP_KtZag5eI2G47JWe0-AuFtD150.woff2') format('woff2');font-display: swap;
+}
+@font-face {font-family: 'barlow-medium'; font-style: normal; font-weight: 400; src: url('./fonts/ZqlneECqpsd9SXlmAsD2E1tXRa8TVwTICgirnJhmVJw.woff2') format('woff2');font-display: swap;
+}
+@font-face {font-family: 'barlow-medium'; font-style: italic; font-weight: 700; src: url('./fonts/hw7DQwyFvE7wFOFzpow4xqg5eI2G47JWe0-AuFtD150.woff2') format('woff2');font-display: swap;
+}
+@font-face {font-family: 'barlow-medium'; font-style: normal; font-weight: 700; src: url('./fonts/yS165lxqGuDghyUMXeu6xVtXRa8TVwTICgirnJhmVJw.woff2') format('woff2');font-display: swap;
+}
+@font-face {font-family: 'barlow-medium'; font-style: italic; font-weight: 400; src: url('./fonts/xJLokI-F3wr7NRWXgS0pZ6g5eI2G47JWe0-AuFtD150.woff2') format('woff2');font-display: swap;
+}
+.prose .source-background-7bb53f { background-color:#7bb53f; }
+.prose .source-background-86e5d1 { background-color:#86e5d1; }
+.prose .source-background-fbd95b { background-color:#fbd95b; }
+.prose .source-background-ffffff { background-color:#ffffff; }
+.prose .source-color-000000 { color:#000000; }
+.prose .source-color-0066ff { color:#0066ff; }
+.prose .source-color-020e14 { color:#020e14; }
+.prose .source-color-0563c1 { color:#0563c1; }
+.prose .source-color-0667e5 { color:#0667e5; }
+.prose .source-color-0e2841 { color:#0e2841; }
+.prose .source-color-0f2453 { color:#0f2453; }
+.prose .source-color-333333 { color:#333333; }
+.prose .source-color-4a4a4a { color:#4a4a4a; }
+.prose .source-color-797d80 { color:#797d80; }
+.prose .source-color-866739 { color:#866739; }
+.prose .source-color-96720e { color:#96720e; }
+.prose .source-color-ffffff { color:#ffffff; }
+.prose .source-face-barlow-extralight { font-family:'barlow-extralight',Barlow,sans-serif; }
+.prose .source-face-barlow-medium { font-family:'barlow-medium',Barlow,sans-serif; }
+.prose .source-float-left { float:left;margin:0px 40px 0px 0px; }
+.prose .source-gap-14 { height:14px; }
+.prose .source-gap-22 { height:22px; }
+.prose .source-gap-24 { height:24px; }
+.prose .source-gap-24_84375 { height:24.84375px; }
+.prose .source-gap-25_203125 { height:25.203125px; }
+.prose .source-gap-27 { height:27px; }
+.prose .source-gap-29 { height:29px; }
+.prose .source-gap-36 { height:36px; }
+.prose .source-gap-39_203125 { height:39.203125px; }
+.prose .source-gap-40_5 { height:40.5px; }
+.prose .source-gap-54 { height:54px; }
+.prose .source-gap-56 { height:56px; }
+.prose .source-line-21_6 { line-height:21.6px; }
+.prose .source-line-24_84 { line-height:24.84px; }
+.prose .source-line-25_2 { line-height:25.2px; }
+.prose .source-line-26_4 { line-height:26.4px; }
+.prose .source-line-27 { line-height:27px; }
+.prose .source-line-27_9984 { line-height:27.9984px; }
+.prose .source-line-30 { line-height:30px; }
+.prose .source-line-33_12 { line-height:33.12px; }
+.prose .source-line-33_6 { line-height:33.6px; }
+.prose .source-line-36 { line-height:36px; }
+.prose .source-line-38_64 { line-height:38.64px; }
+.prose .source-line-42 { line-height:42px; }
+.prose .source-line-54 { line-height:54px; }
+.prose .source-line-56 { line-height:56px; }
+.prose .source-line-63 { line-height:63px; }
+.prose .source-margin-bottom-15 { margin-bottom:15px; }
+.prose .source-margin-left-0 { margin-left:0px; }
+.prose .source-margin-right-18 { margin-right:18px; }
+.prose .source-margin-top-15 { margin-top:15px; }
+.prose .source-padding-bottom-0 { padding-bottom:0px; }
+.prose .source-padding-bottom-12 { padding-bottom:12px; }
+.prose .source-padding-bottom-6 { padding-bottom:6px; }
+.prose .source-padding-left-18 { padding-left:18px; }
+.prose .source-padding-right-0 { padding-right:0px; }
+.prose .source-padding-top-0 { padding-top:0px; }
+.prose .source-padding-top-6 { padding-top:6px; }
+.prose .source-size-18 { font-size:18px; }
+.prose .source-size-20 { font-size:20px; }
+.prose .source-size-24 { font-size:24px; }
+.prose .source-size-28 { font-size:28px; }
+.prose .source-weight-400 { font-weight:400; }

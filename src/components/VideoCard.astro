@@ -9,36 +9,16 @@ const id = youtubeId(video.data.youtube);
 <article class="video-card">
   <div class="video-frame">
     <a class="video-cover" href={`https://www.youtube.com/watch?v=${id}`} target="_blank" rel="noopener noreferrer">
-      <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" width="480" height="360" loading="lazy" />
+      <img src={`https://i.ytimg.com/vi/${id}/mqdefault.jpg`} srcset={`https://i.ytimg.com/vi/${id}/mqdefault.jpg 1x, https://i.ytimg.com/vi/${id}/maxresdefault.jpg 2x`} alt="" width="320" height="180" loading="lazy" />
       <span class="play-icon" aria-hidden="true">▶</span>
       <span class="sr-only">Watch {video.data.title} on YouTube (opens in a new tab)</span>
       {video.data.duration && <span class="video-duration">{video.data.duration}</span>}
     </a>
-    <button hidden class="video-load" data-video-id={id} data-video-title={video.data.title}>Play here <span aria-hidden="true">▶</span></button>
+    <button hidden class="video-load" data-video-id={id} data-video-title={video.data.title} aria-label={`Play Video: ${video.data.title}`}><span aria-hidden="true">▷</span></button>
   </div>
   <div class="card-body">
-    <h3>{video.data.title}</h3>
+    <h3><a class="video-title-link" href={`https://www.youtube.com/watch?v=${id}`} target="_blank" rel="noopener noreferrer">{video.data.title}</a></h3>
     {video.data.description && <p class="video-description">{video.data.description}</p>}
-    <a class="text-link" href={`https://www.youtube.com/watch?v=${id}`} target="_blank" rel="noopener noreferrer">Watch on YouTube <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+    <p class="full-video-description" hidden>{video.data.description || ''}</p>
   </div>
 </article>
-
-<script>
-  document.querySelectorAll<HTMLButtonElement>('.video-load').forEach((button) => {
-    button.hidden = false;
-    button.addEventListener('click', () => {
-      const { videoId, videoTitle } = button.dataset;
-      if (!videoId || !/^[A-Za-z0-9_-]{11}$/.test(videoId)) throw new Error('Invalid YouTube video ID.');
-      const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
-      iframe.title = videoTitle || 'PZRT performance';
-      iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-      iframe.allowFullscreen = true;
-      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-      const frame = button.closest('.video-frame');
-      if (!frame) throw new Error('Video player container not found.');
-      frame.replaceChildren(iframe);
-      iframe.focus();
-    });
-  });
-</script>
