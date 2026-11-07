@@ -30,7 +30,8 @@ avatar: /media/wix-a76bb0_d01f24148afe49f9bfeca5bc1c202a47-mv2.jpg
 <p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-27"><strong><span class="source-color-0f2453">This form of theater</span></strong>
 </p>
 <p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-27"><strong><span class="source-color-0f2453">didn’t happen by chance</span></strong>
-<div class="source-gap-22"></div><div class="source-gap-22"></div></p>
+
+<br></p>
 <p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-27"><strong><span class="source-color-0f2453">Zoom Enchanted Evenings</span></strong>
 </p>
 <p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-27"><strong><span class="source-color-0f2453">Is what we strive and try for</span></strong>

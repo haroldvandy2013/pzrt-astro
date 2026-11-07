@@ -205,20 +205,23 @@ h3 { font-size: 22px; line-height: 1.4; font-weight: 500; }
   .card-body { padding: 18px; }
 }
 @media (max-width: 700px) {
-  .header-inner { width: calc(100% - 36px); padding: 28px 0 24px; }
-  .brand { gap: 16px; align-items: center; }
-  .brand > img { width: 90px; height: 61px; margin-top: 0; }
-  .brand-name { font-size: 29px; line-height: 1.2; white-space: normal; }
-  .brand-tagline { font-size: 14px; line-height: 1.5; margin-top: 12px; white-space: normal; }
-  .menu-toggle { display: block; margin: 24px auto 0; }
+  .header-inner { position: relative; width: 100%; min-height: 352px; padding: 32px 16px 100px; }
+  .brand { flex-direction: column; gap: 14px; align-items: center; text-align: center; }
+  .brand > img { width: 84px; height: 57px; margin-top: 0; }
+  .brand-name { font-size: 26px; line-height: 1.35; white-space: normal; }
+  .brand-tagline { font-size: 17px; line-height: 1.875; max-width: 300px; margin: 30px auto 0; white-space: normal; }
+  .menu-toggle { display: block; position: absolute; top: 32px; right: 24px; width: 40px; margin: 0; padding: 4px; border: 1px solid #3868ff; background: #fff; color: #0000ff; font: 12px/15px Arial, sans-serif; letter-spacing: 4px; word-break: break-all; text-transform: uppercase; }
   .site-header nav { flex-direction: column; text-align: center; margin-top: 20px; padding-top: 12px; }
   .site-header nav.js-ready:not(.is-open) { display: none; }
   .site-header nav a { padding-block: 7px; }
-  .who-we-are { padding: 40px 24px 45px; }
-  .intro-content h1 { font-size: 34px; margin-bottom: 24px; }
-  .intro-content p { font-size: 18px; line-height: 1.85; margin-bottom: 28px; }
+  .who-we-are { padding: 52px 16px 30px; }
+  .intro-content { max-width: 330px; text-align: center; }
+  .intro-content h1 { font-size: 24px; margin-bottom: 14px; }
+  .intro-content p { color: #000; font-size: 18px; line-height: 1.875; margin-bottom: 38px; }
   .poster-carousel { margin-top: 30px; }
-  .poster-slide > img { height: 310px; }
+  .poster-stage { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .poster-slide { flex: 0 0 auto; scroll-snap-align: start; }
+  .poster-slide > img { width: auto; max-width: none; height: 220px; object-fit: contain; }
   .poster-previous { left: -24px; }
   .poster-next { right: -24px; }
   .poster-previous, .poster-next { width: 30px; font-size: 44px; }
@@ -255,9 +258,6 @@ h3 { font-size: 22px; line-height: 1.4; font-weight: 500; }
   .padlet-board iframe { height: 1100px; }
 }
 @media (max-width: 480px) {
-  .brand > img { width: 75px; height: 51px; }
-  .brand-name { font-size: 26px; }
-  .brand-tagline { font-size: 13px; }
   .card-grid, .video-grid { grid-template-columns: 1fr; }
   .card-body { padding: 24px; }
   .article-card .card-body { min-height: 300px; }

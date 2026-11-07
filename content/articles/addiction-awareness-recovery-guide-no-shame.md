@@ -25,7 +25,7 @@ originalLayout: true
 <span class="source-size-20"><span class="source-color-0e2841 source-background-ffffff"> or </span></span><strong><span class="source-size-20"><span class="source-color-0e2841 source-background-ffffff">non-medical drugs</span></span></strong>
 <span class="source-size-20"><span class="source-color-0e2841 source-background-ffffff"> or </span></span><strong><span class="source-size-20"><span class="source-color-0e2841 source-background-ffffff">alcohol </span></span></strong>
 <span class="source-size-20"><span class="source-color-0e2841 source-background-ffffff">and </span></span><strong><span class="source-size-20"><span class="source-color-0e2841 source-background-ffffff">include</span></span></strong>
-<div class="source-gap-24"></div><strong><span class="source-size-20"><span class="source-color-0e2841 source-background-ffffff">many thi</span></span></strong>
+<span class="source-size-20"><span class="source-color-0e2841 source-background-ffffff"> </span></span><strong><span class="source-size-20"><span class="source-color-0e2841 source-background-ffffff">many thi</span></span></strong>
 <span class="source-size-20"><span class="source-color-0e2841 source-background-ffffff">ngs you are probably familiar with.</span></span></p>
 <img src="/media/no-shame.jpeg" alt="" width="740" height="416"><div class="source-gap-14"></div><ul class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-27"><li class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-27"><p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-27"><strong><span class="source-size-18"><span class="source-color-000000">Alcohol</span></span></strong>
 </p>
@@ -61,7 +61,7 @@ originalLayout: true
 <img src="/media/wix-a76bb0_848e85452bf24f029a0f8006aadb8153-mv2.jpeg" alt="" width="740" height="416"><div class="source-gap-56"></div><h2 class="source-size-28 source-face-barlow-medium source-weight-400 source-line-56"><span class="source-color-000000 source-background-86e5d1">Signs Of Addiction</span></h2>
 <p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-36"><strong><span class="source-size-20"><span class="source-color-0e2841">Symptoms of addiction</span></span></strong>
 <span class="source-size-20"><span class="source-color-0e2841"> vary from </span></span><strong><span class="source-size-20"><span class="source-color-0e2841">person to person</span></span></strong>
-<div class="source-gap-24"></div><strong><span class="source-size-20"><span class="source-color-0e2841">based on the substance</span></span></strong>
+<span class="source-size-20"><span class="source-color-0e2841"> </span></span><strong><span class="source-size-20"><span class="source-color-0e2841">based on the substance</span></span></strong>
 <span class="source-size-20"><span class="source-color-0e2841"> or the </span></span><strong><span class="source-size-20"><span class="source-color-0e2841">activity.</span></span></strong>
 </p>
 <img src="/media/wix-a76bb0_efcd0b82ff3842708b82a0b8a147cb42-mv2.jpeg" alt="" width="740" height="416"><div class="source-gap-36"></div><h2 class="source-size-28 source-face-barlow-medium source-weight-400 source-line-56"><span class="source-color-000000 source-background-86e5d1">Causes Of Addiction</span></h2>
@@ -72,7 +72,7 @@ originalLayout: true
 <span class="source-color-000000"> There’s a strong link between addiction and mental health conditions, such as </span><strong><span class="source-color-000000">depression, PTSD and bipolar disorder</span></strong>
 <span class="source-color-000000">. About half of the people who experience a mental health condition will also experience a substance abuse disorder SUD and vice versa.</span></p>
 <p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-36"><strong><span class="source-color-000000">• Environmental factors:</span></strong>
-<div class="source-gap-22"></div><strong><span class="source-color-000000">Access to substances</span></strong>
+<span class="source-color-000000"> </span><strong><span class="source-color-000000">Access to substances</span></strong>
 <span class="source-color-000000"> is a particularly significant environmental risk factor. Factors include substance use by household or peers, misuse‑prone prescriptions, and </span><strong><span class="source-color-000000">adverse childhood experiences (ACEs)</span></strong>
 <span class="source-color-000000">. ACEs are strongly related to addiction and lifelong health problems.</span></p>
 <img src="/media/wix-a76bb0_6e3c48a72fb54abcbde91bfe1b127f0d-mv2.jpeg" alt="" width="740" height="416"><div class="source-gap-36"></div><h2 class="source-size-28 source-face-barlow-medium source-weight-400 source-line-56"><span class="source-color-000000 source-background-86e5d1">Treatment Options</span></h2>
@@ -91,7 +91,7 @@ originalLayout: true
 <span class="source-color-000000"> to gain new perspectives and change behavior.</span></p>
 <p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-36"><strong><span class="source-color-000000">• Support groups:</span></strong>
 <span class="source-color-000000"> Such as </span><strong><span class="source-color-0e2841">Alcoholics Anonymous ( AA), Narcotics Anonymous (NA),</span></strong>
-<div class="source-gap-22"></div><strong><span class="source-color-000000">Al‑Anon</span></strong>
+<span class="source-color-000000"> </span><strong><span class="source-color-000000">Al‑Anon</span></strong>
 <span class="source-color-000000"> (for families). Share experiences and provide ongoing support.</span></p>
 <div class="source-gap-36"></div><h2 class="source-size-28 source-face-barlow-medium source-weight-400 source-line-56"><span class="source-color-000000 source-background-86e5d1">12 Steps of AA / NA</span></h2>
 <p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-36"><strong><span class="source-color-000000">Step 1:</span></strong>

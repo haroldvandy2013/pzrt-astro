@@ -39,9 +39,11 @@ avatar: /media/wix-a76bb0_92dfa883b7654c0b896735a048350bf2-mv2.jpg
 </p>
 <div class="source-gap-36"></div><img src="/media/first-performance.jpg" alt="" width="529" height="298"><p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-36"><span class="source-size-18"><span class="source-color-797d80">(our first live stage performance in 2014 with founding group members)</span></span></p>
 <div class="source-gap-36"></div><p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-36"><strong><span class="source-size-20"><span class="source-color-020e14">Our second performance,</span></span></strong>
-<div class="source-gap-22"></div><strong><em><span class="source-size-20"><span class="source-color-96720e">“Behind the Mask,”</span></span></em>
+<strong><span class="source-size-20"><span class="source-color-96720e"> </span></span></strong>
+<strong><em><span class="source-size-20"><span class="source-color-96720e">“Behind the Mask,”</span></span></em>
 </strong>
-<div class="source-gap-22"></div><strong><span class="source-size-20"><span class="source-color-020e14">reminded us about the mistake of judging people by their appearances.</span></span></strong>
+<strong><span class="source-size-20"><span class="source-color-96720e"> </span></span></strong>
+<strong><span class="source-size-20"><span class="source-color-020e14">reminded us about the mistake of judging people by their appearances.</span></span></strong>
 </p>
 <div class="source-gap-36"></div><img src="/media/wix-a76bb0_3625dca825a642cc8f01dd8ee62a3f2a-mv2.png" alt="" width="526" height="296"><p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-36"><em><span class="source-size-18"><span class="source-color-797d80">(Poster for Be</span></span></em>
 <em><span class="source-size-18"><span class="source-color-797d80">hind the Pandemic Mask</span></span></em>
@@ -121,7 +123,8 @@ avatar: /media/wix-a76bb0_92dfa883b7654c0b896735a048350bf2-mv2.jpg
 </p>
 <div class="source-gap-36"></div><p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-36"><strong><span class="source-size-20"><span class="source-color-020e14">We are</span></span></strong>
 <strong><span class="source-size-20"><span class="source-color-96720e"> currently working on</span></span></strong>
-<div class="source-gap-22"></div><strong><em><span class="source-size-20"><span class="source-color-96720e">&quot;The UnSupreme Court&quot;</span></span></em>
+<strong><span class="source-size-20"><span class="source-color-020e14"> </span></span></strong>
+<strong><em><span class="source-size-20"><span class="source-color-96720e">&quot;The UnSupreme Court&quot;</span></span></em>
 </strong>
 <strong><span class="source-size-20"><span class="source-color-020e14"> and </span></span></strong>
 <strong><em><span class="source-size-20"><span class="source-color-96720e">&quot;What It’s Like to Be Me in Times Like These&quot;.</span></span></em>
@@ -140,10 +143,12 @@ avatar: /media/wix-a76bb0_92dfa883b7654c0b896735a048350bf2-mv2.jpg
 <p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-27"><strong><span class="source-size-20"><span class="source-color-020e14">Emerita Associate Teaching Professor, Drexel University</span></span></strong>
 </p>
 <div class="source-gap-27"></div><p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-27"><strong><span class="source-size-20"><span class="source-color-020e14">Email:</span></span></strong>
-<div class="source-gap-22"></div><a href="mailto:readerstheater2014@gmail.com"><strong><span class="source-size-20"><span class="source-color-0667e5">readerstheater2014@gmail.com</span></span></strong>
+<strong><span class="source-size-20"> </span></strong>
+<a href="mailto:readerstheater2014@gmail.com"><strong><span class="source-size-20"><span class="source-color-0667e5">readerstheater2014@gmail.com</span></span></strong>
 </a></p>
 <p class="source-size-18 source-face-barlow-extralight source-weight-400 source-line-27"><strong><span class="source-size-20"><span class="source-color-020e14">Website:</span></span></strong>
-<div class="source-gap-22"></div><a href="http://www.pzrt.org/"><strong><span class="source-size-20"><span class="source-color-0667e5"><u>www.pzrt.org</u>
+<strong><span class="source-size-20"> </span></strong>
+<a href="http://www.pzrt.org/"><strong><span class="source-size-20"><span class="source-color-0667e5"><u>www.pzrt.org</u>
 </span></span></strong>
 </a></p>
 <div class="source-gap-27"></div><div class="source-gap-27"></div>

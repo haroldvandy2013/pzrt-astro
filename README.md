@@ -8,7 +8,7 @@
 
 Astro + Pages CMS + GitHub Pages，全静态网站，为之后从 Wix 迁移做准备。现在仍使用 GitHub 的项目网址，**没有修改 www.pzrt.org 的 DNS 或原 Wix 网站**。
 
-排版遵循原 Wix 网站：深蓝页眉、Logo 与 Dancing Script 组织名称、Jura 导航/标语、金色标题与页脚；首页按 Who We Are → 单张海报轮播及缩略图 → Get Involved 的原顺序呈现。视频保持两列及 Load More，文章保持三列错落卡片及分页（小屏自适应）。使用原有 Padlet 留言板，保留已确认的邮件联系并去掉聊天/表单；按用户选择不显示 Wix 文章浏览量、点赞和评论统计。
+排版遵循原 Wix 网站：深蓝页眉、Logo 与 Dancing Script 组织名称、Jura 导航/标语、金色标题与页脚；首页按 Who We Are → 海报 → Get Involved 的原顺序呈现。桌面使用单张海报轮播及缩略图，手机恢复上下居中的 Logo/组织名称、居中介绍和横向滑动海报。视频保持两列及 Load More，文章保持三列错落卡片及分页（小屏自适应）。使用原有 Padlet 留言板，保留已确认的邮件联系并去掉聊天/表单；按用户选择不显示 Wix 文章浏览量、点赞和评论统计。
 
 ## 非前端维护者：从这里开始
 
@@ -37,7 +37,7 @@ Astro + Pages CMS + GitHub Pages，全静态网站，为之后从 Wix 迁移做�
 
 ### 首页、联系信息、图片
 
-在 **Homepage, contact & bulletin wall** 编辑介绍段落、Get Involved 插图、海报轮播和联系信息。保留准确的图片描述，方便屏幕阅读器用户。海报按列表顺序展示，可点箭头或缩略图切换，也支持键盘左右键。
+在 **Homepage, contact & bulletin wall** 编辑介绍段落、Get Involved 插图、海报轮播和联系信息。保留准确的图片描述，方便屏幕阅读器用户。海报按列表顺序展示：桌面可点箭头或缩略图切换，手机可横向滑动；也支持键盘左右键。
 
 联系地址目前为 `readerstheater2014@gmail.com`，Contact Us 是邮件链接。文章中原来指向 Alexis 的旧邮箱也已更新为此地址。没有 Wix Let's Chat、注册表单或提交表单。
 
@@ -66,7 +66,7 @@ Astro + Pages CMS + GitHub Pages，全静态网站，为之后从 Wix 迁移做�
 - 旧健康资源正文及链接按历史原文保留，不应把它们当作现行医疗建议。部分历史资源链接仍是 HTTP 或第三方 PDF；本次没有擅自改写资源内容。之后正式迁移前应另行核对链接、版权与时效。
 - 没有把 `/news`、`/programs`、`/meet-the-team` 等未核实的旧/模板内容加入主导航。Pages CMS 账号授权仍需人工完成。
 
-正文保留原站使用的旧版开源 Barlow 字体，许可证位于 `src/styles/fonts/OFL.txt`。没有复制 Wix 的专有 Avenir LT 字体；联系区使用系统字体回退。内容核对不等于逐像素一致：长文章的复杂图文排列及手机布局仍存在差异，不能宣称所有页面已经完全复刻。
+正文保留原站使用的旧版开源 Barlow 字体，许可证位于 `src/styles/fonts/OFL.txt`。没有复制 Wix 的专有 Avenir LT 字体；联系区使用系统字体回退。正文图文环绕和手机主体布局已还原，但内容核对不等于逐像素一致：局部换行、间距、字体回退和第三方组件仍可能不同，不能宣称所有页面、所有屏幕完全一致。
 
 图片源地址为 `https://static.wixstatic.com/media/<原始文件名>`：
 

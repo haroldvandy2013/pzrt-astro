@@ -3,7 +3,7 @@ import MediaImage from './MediaImage.astro';
 import { site, href } from '../lib/site';
 ---
 <div class="poster-carousel" role="region" aria-roledescription="carousel" aria-label="Performance posters">
-  <div class="poster-stage">
+  <div class="poster-stage" tabindex="0" aria-label="Browse performance posters">
     {site.gallery.map((item, index) => (
       <figure class="poster-slide" hidden={index !== 0} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${site.gallery.length}`}>
         <MediaImage src={item.image} alt={item.alt} width={1200} eager={index === 0} sizes="(min-width: 700px) 644px, 90vw" />
@@ -30,20 +30,26 @@ import { site, href } from '../lib/site';
     const previous = carousel.querySelector<HTMLButtonElement>('.poster-previous');
     const next = carousel.querySelector<HTMLButtonElement>('.poster-next');
     const status = carousel.querySelector<HTMLElement>('.poster-status');
+    const thumbnailStrip = carousel.querySelector<HTMLElement>('.poster-thumbnails');
+    const mobile = window.matchMedia('(max-width: 700px)');
     let selected = 0;
     function show(index: number) {
       selected = (index + slides.length) % slides.length;
-      slides.forEach((slide, position) => { slide.hidden = position !== selected; });
+      slides.forEach((slide, position) => { slide.hidden = !mobile.matches && position !== selected; });
       thumbnails.forEach((thumbnail, position) => {
         if (position === selected) thumbnail.setAttribute('aria-current', 'true');
         else thumbnail.removeAttribute('aria-current');
       });
       if (status) status.textContent = thumbnails[selected]?.getAttribute('aria-label') || '';
     }
-    if (slides.length > 1) {
-      if (previous) previous.hidden = false;
-      if (next) next.hidden = false;
+    function refresh() {
+      if (previous) previous.hidden = mobile.matches || slides.length < 2;
+      if (next) next.hidden = mobile.matches || slides.length < 2;
+      if (thumbnailStrip) thumbnailStrip.hidden = mobile.matches;
+      show(selected);
     }
+    mobile.addEventListener('change', refresh);
+    refresh();
     previous?.addEventListener('click', () => show(selected - 1));
     next?.addEventListener('click', () => show(selected + 1));
     thumbnails.forEach((thumbnail, index) => thumbnail.addEventListener('click', (event) => {
@@ -54,7 +60,8 @@ import { site, href } from '../lib/site';
       if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
         event.preventDefault();
         show(selected + (event.key === 'ArrowRight' ? 1 : -1));
-        thumbnails[selected]?.focus();
+        if (mobile.matches) slides[selected]?.scrollIntoView({ block: 'nearest', inline: 'start' });
+        else thumbnails[selected]?.focus();
       }
     });
   });

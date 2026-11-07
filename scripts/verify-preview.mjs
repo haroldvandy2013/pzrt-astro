@@ -19,12 +19,18 @@ try {
     await page.evaluate(() => document.fonts.ready);
     await expect(page.locator('h1')).toContainText('Who We Are');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-    await expect(page.locator('.poster-slide:not([hidden]) img')).toBeVisible();
-    await expect(page.locator('.poster-slide:not([hidden])')).toHaveCount(1);
-    await page.getByRole('button', { name: 'Next poster' }).click();
-    await expect(page.locator('.poster-thumbnail[aria-current=true]')).toHaveAttribute('data-slide-index', '1');
-    await page.getByRole('button', { name: 'Previous poster' }).click();
-    await expect(page.locator('.poster-thumbnail[aria-current=true]')).toHaveAttribute('data-slide-index', '0');
+    await expect(page.locator('.poster-slide:not([hidden]) img').first()).toBeVisible();
+    if (name === 'desktop') {
+      await expect(page.locator('.poster-slide:not([hidden])')).toHaveCount(1);
+      await page.getByRole('button', { name: 'Next poster' }).click();
+      await expect(page.locator('.poster-thumbnail[aria-current=true]')).toHaveAttribute('data-slide-index', '1');
+      await page.getByRole('button', { name: 'Previous poster' }).click();
+      await expect(page.locator('.poster-thumbnail[aria-current=true]')).toHaveAttribute('data-slide-index', '0');
+    } else {
+      await expect(page.locator('.poster-slide:not([hidden])')).toHaveCount(settings.gallery.length);
+      await expect(page.getByRole('button', { name: 'Next poster' })).toBeHidden();
+      expect(await page.locator('.poster-stage').evaluate((stage) => stage.scrollWidth > stage.clientWidth)).toBe(true);
+    }
     const header = await page.locator('.site-header').boundingBox();
     if (name === 'desktop') {
       expect(Math.abs(header.height - 291)).toBeLessThan(15);
